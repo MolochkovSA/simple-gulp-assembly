@@ -6,6 +6,8 @@ import { deleteAsync } from 'del'
 import babel from 'gulp-babel'
 import uglify from 'gulp-uglify'
 import concate from 'gulp-concat'
+import sourcemaps from 'gulp-sourcemaps'
+import autoprefixer from 'gulp-autoprefixer'
 
 const path = {
   styles: {
@@ -25,23 +27,40 @@ export const clean = () => {
 export const styles = () => {
   return gulp
     .src(path.styles.src)
+    .pipe(sourcemaps.init())
     .pipe(less())
-    .pipe(cleanCSS())
+    .pipe(
+      autoprefixer({
+        cascade: false,
+      })
+    )
+    .pipe(
+      cleanCSS({
+        level: 2,
+      })
+    )
     .pipe(
       rename({
-        basename: 'styles',
+        basename: 'style',
         suffix: '.min',
       })
     )
+    .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(path.styles.dest))
 }
 
 export const scripts = () => {
   return gulp
-    .src(path.scripts.src, { sourcemaps: true })
-    .pipe(babel())
+    .src(path.scripts.src)
+    .pipe(sourcemaps.init())
+    .pipe(
+      babel({
+        presets: ['@babel/env'],
+      })
+    )
     .pipe(uglify())
     .pipe(concate('main.min.js'))
+    .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(path.scripts.dest))
 }
 

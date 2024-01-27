@@ -8,6 +8,7 @@ import uglify from 'gulp-uglify'
 import concate from 'gulp-concat'
 import sourcemaps from 'gulp-sourcemaps'
 import autoprefixer from 'gulp-autoprefixer'
+import imagemin from 'gulp-imagemin'
 
 const path = {
   styles: {
@@ -17,6 +18,10 @@ const path = {
   scripts: {
     src: 'src/scripts/**/*.js',
     dest: 'dist/scripts/',
+  },
+  images: {
+    src: 'src/images/*',
+    dest: 'dist/images/',
   },
 }
 
@@ -64,11 +69,19 @@ export const scripts = () => {
     .pipe(gulp.dest(path.scripts.dest))
 }
 
+export const images = () => {
+  return gulp
+    .src(path.images.src)
+    .pipe(imagemin({ progressive: true }))
+    .pipe(gulp.dest(path.images.dest))
+}
+
 export const watch = () => {
   gulp.watch(path.styles.src, styles)
   gulp.watch(path.scripts.src, scripts)
+  gulp.watch(path.images.src, images)
 }
 
-export const build = gulp.series(clean, gulp.parallel(styles, scripts), watch)
+export const build = gulp.series(clean, gulp.parallel(styles, scripts, images), watch)
 
 export default build

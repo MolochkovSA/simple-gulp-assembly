@@ -2,10 +2,11 @@
 
 С помощью этих файлов вы сможете быстро настроить сборку вашего проекта на Gulp.
 
-## Структура каталогов для размещения файлов стилей и скриптов:
+## Структура каталогов для размещения файлов стилей, скриптов и картинок:
 
 > ./src/styles/\*\*/\*.less  
-> ./src/scripts/\*\*/\*.js
+> ./src/scripts/\*\*/\*.js  
+> ./src/images/\*
 
 ## Инструкция:
 
@@ -28,3 +29,6 @@
 [gulp-rename](https://www.npmjs.com/package/gulp-rename) Переименовывает файлы  
 [gulp-clean-css](https://www.npmjs.com/package/gulp-clean-css) Минификация и оптимизация CSS файлов  
 [del](https://www.npmjs.com/package/del) Удаление каталогов и файлов
+[gulp-sourcemaps](https://www.npmjs.com/package/gulp-sourcemaps) Помогает при отладке кода в браузере
+[gulp-autoprefixer](https://www.npmjs.com/package/gulp-autoprefixer) Управление браузерными префиксами в CSS
+[gulp-imagemin](https://www.npmjs.com/package/gulp-imagemin) Сжимаеи изображения

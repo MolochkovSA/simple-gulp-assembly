@@ -1,6 +1,6 @@
 import gulp from 'gulp'
 import less from 'gulp-less'
-import dartSass from 'sass'
+import * as dartSass from 'sass'
 import gulpSass from 'gulp-sass'
 import rename from 'gulp-rename'
 import cleanCSS from 'gulp-clean-css'

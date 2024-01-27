@@ -4,16 +4,18 @@
 
 ## Структура каталогов для размещения файлов стилей, скриптов и картинок:
 
-> ./src/styles/\*\*/\*.less  
-> ./src/scripts/\*\*/\*.js  
+> ./src/\*.html  
+> ./src/styles/\*\*/\*.less, \*.scss, \*.sass  
+> ./src/scripts/\*\*/\*.js, \*.ts  
 > ./src/images/\*
 
 ## Инструкция:
 
 1. Скачать все файлы в любую директорию
 2. Ввести в терминале команду: npm i (должен быть установлен node.js)
-3. Выполнить команду: gulp (запуск таска default)
-4. Писать свой код и наслаждаться автоматической сборкой проекта.
+3. Создать структуру каталогов и файлов
+4. Выполнить команду: gulp (запуск таска default)
+5. Писать свой код и наслаждаться автоматической сборкой проекта.
 
 ## Ссылки
 
@@ -31,7 +33,7 @@
 [del](https://www.npmjs.com/package/del) Удаление каталогов и файлов
 [gulp-sourcemaps](https://www.npmjs.com/package/gulp-sourcemaps) Помогает при отладке кода в браузере
 [gulp-autoprefixer](https://www.npmjs.com/package/gulp-autoprefixer) Управление браузерными префиксами в CSS
-[gulp-imagemin](https://www.npmjs.com/package/gulp-imagemin) Сжимаеи изображения
+[gulp-imagemin](https://www.npmjs.com/package/gulp-imagemin) Сжатие изображений
 [gulp-htmlmin](https://www.npmjs.com/package/gulp-htmlmin) Минификация и оптимизация HTML файлов
 [gulp-size](https://www.npmjs.com/package/gulp-size) Выводит в консоль общий размер файлов в потоке и, при необходимости, размеры отдельных файлов.
 [gulp-newer](https://www.npmjs.com/package/gulp-newer) Позволяет минимизировать только те файлы, что были изменены

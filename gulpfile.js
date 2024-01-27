@@ -9,8 +9,13 @@ import concate from 'gulp-concat'
 import sourcemaps from 'gulp-sourcemaps'
 import autoprefixer from 'gulp-autoprefixer'
 import imagemin from 'gulp-imagemin'
+import htmlmin from 'gulp-htmlmin'
 
 const path = {
+  html: {
+    src: 'src/*.html',
+    dest: 'dist/',
+  },
   styles: {
     src: 'src/styles/**/*.less',
     dest: 'dist/css/',
@@ -25,12 +30,16 @@ const path = {
   },
 }
 
-export const clean = () => {
-  return deleteAsync(['dist'])
-}
+const clean = () => deleteAsync(['dist'])
 
-export const styles = () => {
-  return gulp
+const html = () =>
+  gulp
+    .src(path.html.src)
+    .pipe(htmlmin({ collapseWhitespace: true }))
+    .pipe(gulp.dest(path.html.dest))
+
+const styles = () =>
+  gulp
     .src(path.styles.src)
     .pipe(sourcemaps.init())
     .pipe(less())
@@ -52,10 +61,9 @@ export const styles = () => {
     )
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(path.styles.dest))
-}
 
-export const scripts = () => {
-  return gulp
+const scripts = () =>
+  gulp
     .src(path.scripts.src)
     .pipe(sourcemaps.init())
     .pipe(
@@ -67,21 +75,20 @@ export const scripts = () => {
     .pipe(concate('main.min.js'))
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(path.scripts.dest))
-}
 
-export const images = () => {
-  return gulp
+const images = () =>
+  gulp
     .src(path.images.src)
     .pipe(imagemin({ progressive: true }))
     .pipe(gulp.dest(path.images.dest))
-}
 
-export const watch = () => {
+const watch = () => {
+  gulp.watch(path.html.src, html)
   gulp.watch(path.styles.src, styles)
   gulp.watch(path.scripts.src, scripts)
   gulp.watch(path.images.src, images)
 }
 
-export const build = gulp.series(clean, gulp.parallel(styles, scripts, images), watch)
+const build = gulp.series(clean, html, gulp.parallel(styles, scripts, images), watch)
 
 export default build

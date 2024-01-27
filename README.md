@@ -32,3 +32,4 @@
 [gulp-sourcemaps](https://www.npmjs.com/package/gulp-sourcemaps) Помогает при отладке кода в браузере
 [gulp-autoprefixer](https://www.npmjs.com/package/gulp-autoprefixer) Управление браузерными префиксами в CSS
 [gulp-imagemin](https://www.npmjs.com/package/gulp-imagemin) Сжимаеи изображения
+[gulp-htmlmin](https://www.npmjs.com/package/gulp-htmlmin) Минификация и оптимизация HTML файлов

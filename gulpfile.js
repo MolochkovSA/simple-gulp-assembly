@@ -12,6 +12,9 @@ import imagemin from 'gulp-imagemin'
 import htmlmin from 'gulp-htmlmin'
 import size from 'gulp-size'
 import newer from 'gulp-newer'
+import { create } from 'browser-sync'
+
+const browserSync = create()
 
 const path = {
   html: {
@@ -40,6 +43,7 @@ const html = () =>
     .pipe(htmlmin({ collapseWhitespace: true }))
     .pipe(size({ title: 'html' }))
     .pipe(gulp.dest(path.html.dest))
+    .pipe(browserSync.stream())
 
 const styles = () =>
   gulp
@@ -65,6 +69,7 @@ const styles = () =>
     .pipe(sourcemaps.write('.'))
     .pipe(size({ title: 'styles' }))
     .pipe(gulp.dest(path.styles.dest))
+    .pipe(browserSync.stream())
 
 const scripts = () =>
   gulp
@@ -80,6 +85,7 @@ const scripts = () =>
     .pipe(sourcemaps.write('.'))
     .pipe(size({ title: 'scripts' }))
     .pipe(gulp.dest(path.scripts.dest))
+    .pipe(browserSync.stream())
 
 const images = () =>
   gulp
@@ -90,7 +96,12 @@ const images = () =>
     .pipe(gulp.dest(path.images.dest))
 
 const watch = () => {
-  gulp.watch(path.html.src, html)
+  browserSync.init({
+    server: {
+      baseDir: './dist/',
+    },
+  })
+  gulp.watch(path.html.src, html).on('change', browserSync.reload)
   gulp.watch(path.styles.src, styles)
   gulp.watch(path.scripts.src, scripts)
   gulp.watch(path.images.src, images)

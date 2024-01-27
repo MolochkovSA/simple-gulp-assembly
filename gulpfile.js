@@ -11,6 +11,7 @@ import autoprefixer from 'gulp-autoprefixer'
 import imagemin from 'gulp-imagemin'
 import htmlmin from 'gulp-htmlmin'
 import size from 'gulp-size'
+import newer from 'gulp-newer'
 
 const path = {
   html: {
@@ -31,7 +32,7 @@ const path = {
   },
 }
 
-const clean = () => deleteAsync(['dist'])
+const clean = () => deleteAsync(['dist/*', '!dist/images'])
 
 const html = () =>
   gulp
@@ -83,6 +84,7 @@ const scripts = () =>
 const images = () =>
   gulp
     .src(path.images.src)
+    .pipe(newer(path.images.dest))
     .pipe(imagemin({ progressive: true }))
     .pipe(size({ title: 'images' }))
     .pipe(gulp.dest(path.images.dest))

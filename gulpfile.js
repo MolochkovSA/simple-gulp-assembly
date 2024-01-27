@@ -15,6 +15,7 @@ import htmlmin from 'gulp-htmlmin'
 import size from 'gulp-size'
 import newer from 'gulp-newer'
 import { create } from 'browser-sync'
+import typescript from 'gulp-typescript'
 
 const sass = gulpSass(dartSass)
 const browserSync = create()
@@ -29,7 +30,7 @@ const path = {
     dest: 'dist/css/',
   },
   scripts: {
-    src: 'src/scripts/**/*.js',
+    src: ['src/scripts/**/*.js', 'src/scripts/**/*.ts'],
     dest: 'dist/scripts/',
   },
   images: {
@@ -79,6 +80,12 @@ const scripts = () =>
   gulp
     .src(path.scripts.src)
     .pipe(sourcemaps.init())
+    .pipe(
+      typescript({
+        noImplicitAny: true,
+        outFile: 'main.min.js',
+      })
+    )
     .pipe(
       babel({
         presets: ['@babel/env'],

@@ -10,6 +10,7 @@ import sourcemaps from 'gulp-sourcemaps'
 import autoprefixer from 'gulp-autoprefixer'
 import imagemin from 'gulp-imagemin'
 import htmlmin from 'gulp-htmlmin'
+import size from 'gulp-size'
 
 const path = {
   html: {
@@ -36,6 +37,7 @@ const html = () =>
   gulp
     .src(path.html.src)
     .pipe(htmlmin({ collapseWhitespace: true }))
+    .pipe(size({ title: 'html' }))
     .pipe(gulp.dest(path.html.dest))
 
 const styles = () =>
@@ -60,6 +62,7 @@ const styles = () =>
       })
     )
     .pipe(sourcemaps.write('.'))
+    .pipe(size({ title: 'styles' }))
     .pipe(gulp.dest(path.styles.dest))
 
 const scripts = () =>
@@ -74,12 +77,14 @@ const scripts = () =>
     .pipe(uglify())
     .pipe(concate('main.min.js'))
     .pipe(sourcemaps.write('.'))
+    .pipe(size({ title: 'scripts' }))
     .pipe(gulp.dest(path.scripts.dest))
 
 const images = () =>
   gulp
     .src(path.images.src)
     .pipe(imagemin({ progressive: true }))
+    .pipe(size({ title: 'images' }))
     .pipe(gulp.dest(path.images.dest))
 
 const watch = () => {

@@ -33,3 +33,4 @@
 [gulp-autoprefixer](https://www.npmjs.com/package/gulp-autoprefixer) Управление браузерными префиксами в CSS
 [gulp-imagemin](https://www.npmjs.com/package/gulp-imagemin) Сжимаеи изображения
 [gulp-htmlmin](https://www.npmjs.com/package/gulp-htmlmin) Минификация и оптимизация HTML файлов
+[gulp-size](https://www.npmjs.com/package/gulp-size) Выводит в консоль общий размер файлов в потоке и, при необходимости, размеры отдельных файлов.

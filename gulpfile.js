@@ -1,5 +1,7 @@
 import gulp from 'gulp'
 import less from 'gulp-less'
+import dartSass from 'sass'
+import gulpSass from 'gulp-sass'
 import rename from 'gulp-rename'
 import cleanCSS from 'gulp-clean-css'
 import { deleteAsync } from 'del'
@@ -14,6 +16,7 @@ import size from 'gulp-size'
 import newer from 'gulp-newer'
 import { create } from 'browser-sync'
 
+const sass = gulpSass(dartSass)
 const browserSync = create()
 
 const path = {
@@ -22,7 +25,7 @@ const path = {
     dest: 'dist/',
   },
   styles: {
-    src: 'src/styles/**/*.less',
+    src: ['src/styles/**/*.less', 'src/styles/**/*.sass', 'src/styles/**/*.scss'],
     dest: 'dist/css/',
   },
   scripts: {
@@ -30,7 +33,7 @@ const path = {
     dest: 'dist/scripts/',
   },
   images: {
-    src: 'src/images/*',
+    src: 'src/images/**',
     dest: 'dist/images/',
   },
 }
@@ -49,7 +52,8 @@ const styles = () =>
   gulp
     .src(path.styles.src)
     .pipe(sourcemaps.init())
-    .pipe(less())
+    // .pipe(less())
+    .pipe(sass().on('error', sass.logError))
     .pipe(
       autoprefixer({
         cascade: false,

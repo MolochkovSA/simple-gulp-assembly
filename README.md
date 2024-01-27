@@ -36,3 +36,4 @@
 [gulp-size](https://www.npmjs.com/package/gulp-size) Выводит в консоль общий размер файлов в потоке и, при необходимости, размеры отдельных файлов.
 [gulp-newer](https://www.npmjs.com/package/gulp-newer) Позволяет минимизировать только те файлы, что были изменены
 [browser-sync](https://www.npmjs.com/package/browser-sync) Синхронизация браузера при создании веб-сайтов.
+[gulp-sass](https://www.npmjs.com/package/gulp-sass) Компиляция SASS SCSS файлов
